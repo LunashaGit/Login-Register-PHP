@@ -83,8 +83,12 @@ if (isset($_POST['submit'])) {
 			<div class="form-group">
 				<input type="text" placeholder="Username" autocomplete="off" name="username" value="<?= $username; ?>" required>
 				<input type="email" placeholder="Email" autocomplete="off" name="email" value="<?= $email; ?>" required>
-				<input type="password" placeholder="Password" name="password" required>
-				<input type="password" placeholder="Confirm Password" name="cpassword" required>
+				<input type="password" class="password" placeholder="Password" name="password" required>
+				<input type="password" class="password" placeholder="Confirm Password" name="cpassword" required>
+				<label for="show-password" style="display: inherit;" class="show-password">
+				<input type="checkbox" name="showpassword" style="box-shadow: none; width: auto; margin:1.2rem 1rem;" onclick="showPassword()">
+				<p>show Password</p>
+				</label>
 				<button name="submit" class="btn">SIGN UP</button>
 			</div>
 			<p style="color: green; text-align:center;"><?= (!empty($validation)) ? $validation . "<br>" . "Going to login page in 3 seconds !" : "" ?></p>
@@ -92,5 +96,18 @@ if (isset($_POST['submit'])) {
 			<p class="login-register-text"><a href="index.php">Login Page</a></p>
 		</form>
 	</div>
+	<script>
+		function showPassword() {
+		const x = document.querySelectorAll(".password");
+		x.forEach(element => {
+			if (element.type === "password") {
+				element.type = "text";
+			} else {
+				element.type = "password";
+			}
+		});
+		}
+		
+	</script>
 </body>
 </html>
