@@ -19,13 +19,13 @@ if(isset($_GET['email']) && isset($_GET['token'])){
             }
             
         } else {
-            $error = "Email not found";
+            $error = "Email or Token not valid.";
         }
     } else {
-        $error = "Password doesn't match";
+        $error = "Password doesn't match.";
     }
 } else {
-    $error = "Email & token not set";
+    $error = "Email & token not set.";
 }
 ?>
 <?php include './parts/head.php'; ?>
