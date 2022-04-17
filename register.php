@@ -1,11 +1,38 @@
 <?php 
+
 $title = "Register";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require './vendor/phpmailer/phpmailer/src/PHPMailer.php';	
+require './vendor/phpmailer/phpmailer/src/SMTP.php';	
+require './vendor/phpmailer/phpmailer/src/Exception.php';	
 
 include 'config.php';
 
 error_reporting(0);
 
 session_start();
+
+$mail = new PHPMailer(true);
+try{
+	$mail->IsSMTP();
+	$mail->SMTPAuth = 1;
+	$mail->Host = $_ENV['SMTP_server'];               
+	$mail->Port = 465;                          
+	$mail->SMTPSecure = 'ssl';
+	$mail->Username   =  $_ENV['SMTP_account'];   
+	$mail->Password   =  $_ENV['SMTP_password'];         
+	$mail->setFrom($_ENV['SMTP_from']);  
+	$mail->addReplyTo($_ENV['SMTP_account'], $_ENV['SMTP_name']); 
+	$mail->Subject    = 'Your Account Has Been Created';
+	$mail->Body       = 'Your account has been created. Your account is now ready to use.';
+} catch (Exception $e) {
+	echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+}
+
 
 if (isset($_SESSION['username'])) {
     header("Location: index.php");
@@ -25,6 +52,8 @@ if (isset($_POST['submit'])) {
 					VALUES ('$username', '$email', '$password')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
+				$mail->AddAddress($email,$username);
+				$mail->send();
 				$username = "";
 				$email = "";
 				$_POST['password'] = "";
