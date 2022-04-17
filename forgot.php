@@ -51,6 +51,7 @@ if (isset($_POST['submit'])) {
             $mail->send();
             $email = "";
             $_POST['email'] = "";
+            $validation = "An email has been sent!";
         } else {
             $error =  "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -62,13 +63,14 @@ if (isset($_POST['submit'])) {
 <?php include './parts/head.php'; ?>
 <body>
     <div class="container">
-        <h1 class="form-title">Reset Password</h1>
+        <h1 class="form-title">Forgot Password</h1>
         <p style="color: red; text-align:center;"><?= (!empty($error)) ? $error : "" ?></p>
         <form action="" method="POST">
             <div class="form-group">
                 <input type="email" autocomplete="off" name="email"  class="form-control" placeholder="Email" required>
                 <button name="submit" class="btn">Send Mail</button>
             </div>
+			<p style="color: green; text-align:center;"><?= (!empty($validation)) ? $validation : "" ?></p>
         </form>
     </div>
 </body>
