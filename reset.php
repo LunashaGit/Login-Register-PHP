@@ -37,8 +37,25 @@ if(isset($_GET['email']) && isset($_GET['token'])){
         <div class="form-group">
             <input type="password" class="password" placeholder="Password" name="password" required>
             <input type="password" class="password" placeholder="Confirm Password" name="cpassword" required>
+            <label for="show-password" style="display: inherit;" class="show-password">
+				<input type="checkbox" name="showpassword" style="box-shadow: none; width: auto; margin:1.2rem 1rem;" onclick="showPassword()">
+				<p>show Password</p>
+            </label>
             <button name="submit" class="btn">Reset</button>
         </div>
     </form>
     </div>
+    <script>
+		function showPassword() {
+		const x = document.querySelectorAll(".password");
+		x.forEach(element => {
+			if (element.type === "password") {
+				element.type = "text";
+			} else {
+				element.type = "password";
+			}
+		});
+		}
+	</script>
 </body>
+</html>
