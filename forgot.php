@@ -63,6 +63,7 @@ if (isset($_POST['submit'])) {
 <?php include './parts/head.php'; ?>
 <body>
     <div class="container">
+        <a href="index.php"><i class="arrow left"></i></a>
         <h1 class="form-title">Forgot Password</h1>
         <p style="color: red; text-align:center;"><?= (!empty($error)) ? $error : "" ?></p>
         <form action="" method="POST">
