@@ -25,6 +25,16 @@ body {
   background-color: white;
   animation: 0.6s ease-out 0s 1 slideInFromUp;
 }
+.container .arrow {
+  border: solid black;
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 5px;
+}
+.container .left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
 .container p {
   font-size: 1rem;
   font-weight: bold;

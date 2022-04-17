@@ -78,6 +78,7 @@ if (isset($_POST['submit'])) {
 <body>
 	<div class="container">
 		<form action="" method="POST">
+			<a href="index.php"><i class="arrow left"></i></a>
             <h1 class="form-title">SIGN UP</h1>
 			<p style="color: red; text-align:center;"><?= (!empty($error)) ? $error : "" ?></p>
 			<div class="form-group">
