@@ -49,15 +49,18 @@ if (isset($_POST['submit'])) {
 <body>
 	<div class="container">
 		<form action="" method="POST">
-            <p>Register</p>
+            <h1 class="form-title">SIGN UP</h1>
 			<p style="color: red; text-align:center;"><?= (!empty($error)) ? $error : "" ?></p>
-			<input type="text" placeholder="Username" autocomplete="off" name="username" value="<?= $username; ?>" required>
-			<input type="email" placeholder="Email" autocomplete="off" name="email" value="<?= $email; ?>" required>
-			<input type="password" placeholder="Password" name="password" required>
-			<input type="password" placeholder="Confirm Password" name="cpassword" required>
-			<button name="submit" class="btn">Register</button>
+			<div class="form-group">
+				<input type="text" placeholder="Username" autocomplete="off" name="username" value="<?= $username; ?>" required>
+				<input type="email" placeholder="Email" autocomplete="off" name="email" value="<?= $email; ?>" required>
+				<input type="password" placeholder="Password" name="password" required>
+				<input type="password" placeholder="Confirm Password" name="cpassword" required>
+				<button name="submit" class="btn">SIGN UP</button>
+			</div>
 			<p style="color: green; text-align:center;"><?= (!empty($validation)) ? $validation . "<br>" . "Going to login page in 3 seconds !" : "" ?></p>
-			<p class="login-register-text">Have an account? <a href="index.php">Login Here</a>.</p>
+			<hr>
+			<p class="login-register-text"><a href="index.php">Login Page</a></p>
 		</form>
 	</div>
 </body>

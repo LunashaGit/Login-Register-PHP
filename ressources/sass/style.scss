@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1c0fd;
+}
+
+.container{
+    max-width: 100vw;
+    display: block;
+    box-shadow: 0px 0px 3px 2px rgba(0,0,0,0.2);
+    padding: 2rem;
+    border-radius: .5rem;
+    background-color: white;
+    
+    p{
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    a{
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        color: #998f9b;
+    }
+    hr{
+        width: 50%;
+        margin: 1.2rem auto;
+    }
+    .form{
+        &-title{
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            text-align: left;
+            font-family: 'Quicksand', sans-serif;
+        }
+        &-group{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            button{
+                width: 75%;
+                height: 2rem;
+                border: 1px solid rgb(243, 151, 255);
+                box-shadow: 1px 2px 2px rgba(7, 6, 7, 0.6);
+                border-radius: 0.2rem;
+                background-color: rgb(243, 151, 255);
+                color: rgb(255, 255, 255);
+                font-size: 1.2rem;
+                margin: 1rem 0;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+            input{
+                width: 100%;
+                box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.2);
+                border: none;
+                font-size: 1.2rem;
+                border-radius: 0.2rem;
+                padding: 0.5rem;
+                margin-bottom: 1rem;
+                transition: .2s;
+                font-family: 'Quicksand', sans-serif;
+                &:focus{
+                    outline: none;
+                    transform: scale(1.1);
+                    border: 1px solid rgb(168, 86, 189);
+                }
+            }
+        }
+    }
+}

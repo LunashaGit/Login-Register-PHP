@@ -31,12 +31,15 @@ if (isset($_POST['submit'])) {
 <body>
 	<div class="container">
 		<form action="" method="POST">
-			<p>Login</p>
+			<h1 class="form-title">Login</h1>
 			<p style="color: red; text-align:center;"><?= (!empty($error)) ? $error : "" ?></p>
-			<input type="email" placeholder="Email" autocomplete="off" name="email" value="<?= $email; ?>" required>
-			<input type="password" placeholder="Password" name="password"  required>
-			<button name="submit" class="btn">Login</button>
-			<p>Don't have an account? <a href="register.php">Register Here</a>.</p>
+			<div class="form-group">
+				<input type="email" placeholder="Email" autocomplete="off" name="email" value="<?= $email; ?>" required>
+				<input type="password" placeholder="Password" name="password"  required>
+				<button name="submit" class="btn">Login</button>
+			</div>
+			<hr>
+			<p><a href="register.php">Register Page</a></p>
 		</form>
 	</div>
 </body>

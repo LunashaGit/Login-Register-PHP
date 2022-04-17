@@ -12,7 +12,9 @@ if (!isset($_SESSION['username'])) {
 
 <?php include './parts/head.php'; ?>
 <body>
-    <?= "<h1>Welcome " . $_SESSION['username'] . "</h1>"; ?>
-    <a href="logout.php">Logout</a>
+    <div class="container">
+        <h1 class="form-title"><?= "Welcome : " . $_SESSION['username'] . " !"; ?></h1>
+        <a href="logout.php">Logout</a>
+    </div>
 </body>
 </html>
