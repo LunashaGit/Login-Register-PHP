@@ -28,7 +28,6 @@ try {
 	$mail->setFrom($_ENV['SMTP_from']);
 	$mail->addReplyTo($_ENV['SMTP_account'], $_ENV['SMTP_name']);
 	$mail->Subject    = 'Your Account Has Been Created';
-	$mail->Body       = 'Your account has been created. Your account is now ready to use.';
 } catch (Exception $e) {
 	echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 }
@@ -55,6 +54,12 @@ if (isset($_POST['submit'])) {
 				$result = mysqli_query($conn, $sql);
 				if ($result) {
 					$mail->AddAddress($email, $username);
+					$mail->isHTML(true);
+					$mail->Body = '
+					<h1>Welcome to the website!</h1>
+					<p>Your account has been created!</p>
+					<p>Enjoy!</p>
+					';
 					$mail->send();
 					$username = "";
 					$email = "";
