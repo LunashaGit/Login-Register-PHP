@@ -43,11 +43,13 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['id'] = $row['id'];
             $token = str_random(60);
             $update = "UPDATE users SET reset_token='$token' WHERE email='$email'";
             mysqli_query($conn,$update);
             $mail->AddAddress($email);
-	        $mail->Body = "With this link you can reset your password: \n http://localhost:8005/reset.php?email={$email}&token={$token}";
+	        $mail->Body = "With this link you can reset your password: \n http://localhost:8005/reset.php?id={$_SESSION['id']}&token={$token}";
             $mail->send();
             $email = "";
             $_POST['email'] = "";

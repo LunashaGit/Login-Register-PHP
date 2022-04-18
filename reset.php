@@ -1,18 +1,18 @@
 <?php
 include 'config.php';
 
-if (isset($_GET['email']) && isset($_GET['token'])) {
-    $email = $_GET['email'];
+if (isset($_GET['id']) && isset($_GET['token'])) {
+    $id = $_GET['id'];
     $token = $_GET['token'];
     $password = md5($_POST['password']);
     $cpassword = md5($_POST['cpassword']);
     if (isset($_POST['submit'])) {
         if ($password === $cpassword) {
-            $sql = "SELECT * FROM users WHERE email='$email' AND reset_token='$token'";
+            $sql = "SELECT * FROM users WHERE id='$id' AND reset_token='$token'";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {
                 if ($result) {
-                    $response = "UPDATE users SET password='$password', reset_token='' WHERE email='$email' AND reset_token='$token'";
+                    $response = "UPDATE users SET password='$password', reset_token='' WHERE id='$id' AND reset_token='$token'";
                     mysqli_query($conn, $response);
                     $validation = "Password changed successfully";
                 } else {
