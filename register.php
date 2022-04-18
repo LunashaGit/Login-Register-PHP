@@ -43,12 +43,10 @@ if (isset($_POST['submit'])) {
 	if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
 		$error = "Username can only contain letters and numbers!";
 	} else {
-
-		$email = htmlspecialchars(strtolower($_POST['email']));
-		$password = md5($_POST['password']);
-		$cpassword = md5($_POST['cpassword']);
-
+		$email = strtolower($_POST['email']);
 		if ($password == $cpassword) {
+			$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+			$cpassword = password_hash($_POST['cpassword'], PASSWORD_BCRYPT);
 			$sql = "SELECT * FROM users WHERE email='$email'";
 			$result = mysqli_query($conn, $sql);
 			if (!$result->num_rows > 0) {

@@ -5,10 +5,10 @@ include 'config.php';
 if (isset($_GET['id']) && isset($_GET['token'])) {
     $id = $_GET['id'];
     $token = $_GET['token'];
-    $password = md5($_POST['password']);
-    $cpassword = md5($_POST['cpassword']);
     if (isset($_POST['submit'])) {
         if ($password === $cpassword) {
+            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+            $cpassword = password_hash($_POST['cpassword'], PASSWORD_BCRYPT);
             $sql = "SELECT * FROM users WHERE id='$id' AND reset_token='$token'";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {

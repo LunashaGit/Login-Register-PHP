@@ -12,18 +12,21 @@ if (isset($_SESSION['username'])) {
 
 if (isset($_POST['submit'])) {
 	$email = $_POST['email'];
-	$password = md5($_POST['password']);
-
-	$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+	$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+	$sql = "SELECT * FROM users WHERE email='$email'";
 	$result = mysqli_query($conn, $sql);
 	if ($result->num_rows > 0) {
 		$row = mysqli_fetch_assoc($result);
-		$_SESSION['username'] = $row['username'];
-		$_SESSION['permission'] = $row['permission'];
-		if ($_SESSION['permission'] == 1) {
-			header("Location: admin.php");
+		if (password_verify($_POST['password'], $row['password'])) {
+			$_SESSION['username'] = $row['username'];
+			$_SESSION['permission'] = $row['permission'];
+			if ($_SESSION['permission'] == 1) {
+				header("Location: admin.php");
+			} else {
+				header("Location: welcome.php");
+			}
 		} else {
-			header("Location: welcome.php");
+			$error = "Wrong password!";
 		}
 	} else {
 		$error = "Email or Password is Wrong.";
