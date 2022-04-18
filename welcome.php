@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Hobby";
+$title = "Welcome page";
 
 session_start();
 

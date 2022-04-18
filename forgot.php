@@ -1,5 +1,6 @@
 <?php
-$title = "Reset";
+
+$title = "Forgot";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

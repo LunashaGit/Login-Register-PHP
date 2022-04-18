@@ -1,5 +1,6 @@
 <?php 
 
+$title = "Admin page";
 session_start();
 
 if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
