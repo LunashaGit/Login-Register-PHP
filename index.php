@@ -19,7 +19,12 @@ if (isset($_POST['submit'])) {
 	if ($result->num_rows > 0) {
 		$row = mysqli_fetch_assoc($result);
 		$_SESSION['username'] = $row['username'];
-		header("Location: welcome.php");
+		$_SESSION['permission'] = $row['permission'];
+		if ($_SESSION['permission'] == 1) {
+			header("Location: admin.php");
+		} else {
+			header("Location: welcome.php");
+		}
 	} else {
 		$error = "Email or Password is Wrong.";
 	}
