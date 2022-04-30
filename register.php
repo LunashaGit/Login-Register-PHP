@@ -46,12 +46,12 @@ if (isset($_POST['submit'])) {
 		if ($password == $cpassword) {
 			$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 			$cpassword = password_hash($_POST['cpassword'], PASSWORD_BCRYPT);
-			$sql = "SELECT * FROM users WHERE email='$email'";
-			$result = mysqli_query($conn, $sql);
-			if (!$result->num_rows > 0) {
-				$sql = "INSERT INTO users (username, email, password)
-					VALUES ('$username', '$email', '$password')";
-				$result = mysqli_query($conn, $sql);
+			$sql = $conn->prepare("SELECT * FROM users WHERE email='$email'");
+			$sql->execute();
+			if (!$sql->rowCount() > 0) {
+				$result = $conn->prepare("INSERT INTO users (username, email, password)
+					VALUES ('$username', '$email', '$password')");
+				$result->execute();
 				if ($result) {
 					$mail->AddAddress($email, $username);
 					$mail->isHTML(true);

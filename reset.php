@@ -9,12 +9,12 @@ if (isset($_GET['id']) && isset($_GET['token'])) {
         if ($password === $cpassword) {
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $cpassword = password_hash($_POST['cpassword'], PASSWORD_BCRYPT);
-            $sql = "SELECT * FROM users WHERE id='$id' AND reset_token='$token'";
-            $result = mysqli_query($conn, $sql);
-            if ($result->num_rows > 0) {
-                if ($result) {
-                    $response = "UPDATE users SET password='$password', reset_token='' WHERE id='$id' AND reset_token='$token'";
-                    mysqli_query($conn, $response);
+            $sql = $conn->prepare("SELECT * FROM users WHERE id='$id' AND reset_token='$token'");
+            $sql->execute();
+            if ($sql->rowCount() > 0) {
+                if ($sql) {
+                    $response = $conn->prepare("UPDATE users SET password='$password', reset_token='' WHERE id='$id' AND reset_token='$token'");
+                    $response->execute();
                     $validation = "Password changed successfully";
                 } else {
                     $error = "Update failed.";

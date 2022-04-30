@@ -40,16 +40,16 @@ try{
 
 if (isset($_POST['submit'])) {
 	$email = strtolower($_POST['email']);
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
-    if ($result->num_rows > 0) {
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
+    $sql = $conn->prepare("SELECT * FROM users WHERE email='$email'");
+    $sql->execute();
+    if ($sql->rowCount() > 0) {
+        if ($sql) {
+            $row = $sql->fetch();
             $_SESSION['id'] = $row['id'];
             $_SESSION['username'] = $row['username'];
             $token = str_random(60);
-            $update = "UPDATE users SET reset_token='$token' WHERE email='$email'";
-            mysqli_query($conn,$update);
+            $update = $conn->prepare("UPDATE users SET reset_token='$token' WHERE email='$email'");
+            $update->execute();
             $mail->AddAddress($email);
             $mail->isHTML(true);
 	        $mail->Body = "
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
             $_POST['email'] = "";
             $validation = "An email has been sent!";
         } else {
-            $error =  "Error: " . $sql . "<br>" . mysqli_error($conn);
+            $error =  "Error: " . $sql . "<br>" . "Error Code: " . $conn->error;
         }
     } else {
         $error = "Email not found";

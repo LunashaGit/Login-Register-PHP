@@ -13,10 +13,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['permission'])) {
 if (isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-	$sql = "SELECT * FROM users WHERE email='$email'";
-	$result = mysqli_query($conn, $sql);
-	if ($result->num_rows > 0) {
-		$row = mysqli_fetch_assoc($result);
+	$sql = $conn->prepare("SELECT * FROM users WHERE email='$email'");
+	$sql->execute();
+	if ($sql->rowCount() > 0) {
+		$row = $sql->fetch();
 		if (password_verify($_POST['password'], $row['password'])) {
 			$_SESSION['username'] = $row['username'];
 			$_SESSION['permission'] = $row['permission'];
